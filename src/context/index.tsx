@@ -1,6 +1,8 @@
-import React, { createContext } from "react";
+import React, { createContext, Dispatch, useReducer } from "react";
+import reducer from "../reducer";
+import { Actions } from "../reducer/actions";
 
-interface User {
+export interface User {
   name: string;
   email: string;
   country: string;
@@ -8,7 +10,7 @@ interface User {
   gender: string;
   age: number;
 }
-interface ContextData {
+export interface StateData {
   users: User[];
   loading: boolean;
 }
@@ -16,10 +18,19 @@ const initialState = {
   users: [],
   loading: false,
 };
-export const appContext = createContext<ContextData>(initialState);
+interface ContextData {
+  state: StateData;
+  dispatch: Dispatch<Actions>;
+}
+export const appContext = createContext<ContextData>({
+  state: initialState,
+  dispatch: () => null,
+});
 const { Provider } = appContext;
 
 const AppContext: React.FC = ({ children }) => {
-  return <Provider value={initialState}>{children}</Provider>;
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return <Provider value={{ state, dispatch }}>{children}</Provider>;
 };
 export default AppContext;

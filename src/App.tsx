@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { appContext } from "./context";
+import { setLoading } from "./reducer/actions";
 
 function App() {
-  const { loading } = useContext(appContext);
+  const { state: loading, dispatch } = useContext(appContext);
+  useEffect(() => {
+    console.log(loading);
+    dispatch(setLoading());
+  }, []);
   console.log(loading);
   return (
     <div className="App">
