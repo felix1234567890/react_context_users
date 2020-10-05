@@ -1,8 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { appContext } from "./context";
 
 function App() {
+  const { loading } = useContext(appContext);
+  console.log(loading);
   return (
     <div className="App">
       <header className="App-header">
