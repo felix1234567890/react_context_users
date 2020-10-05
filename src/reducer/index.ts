@@ -1,5 +1,6 @@
 import { StateData } from "../context";
 import { Actions, ActionType } from "./actions";
+import { sortUsers, filterUsers } from "./helpers";
 
 export default (state: StateData, action: Actions) => {
   switch (action.type) {
@@ -18,15 +19,17 @@ export default (state: StateData, action: Actions) => {
         ...state,
         language: state.language === "en" ? "hr" : "en",
       };
-    case ActionType.SetSortOrder:
+    case ActionType.SortUsers:
+      const sortedUsers = sortUsers(state.users, action.payload);
       return {
         ...state,
-        sortOrder: action.payload,
+        filteredUsers: sortedUsers,
       };
-    case ActionType.SetSearch:
+    case ActionType.FilterUsers:
+      const filteredUsers = filterUsers(state.users, action.payload);
       return {
         ...state,
-        search: action.payload,
+        filteredUsers,
       };
     default:
       return state;

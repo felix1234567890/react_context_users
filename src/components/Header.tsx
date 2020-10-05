@@ -1,17 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { appContext } from "../context";
-import { setLanguage, setSearch } from "../reducer/actions";
+import { filterUsers, setLanguage } from "../reducer/actions";
 import { useTranslation, UseTranslationResponse } from "react-i18next";
 
 const Header = () => {
+  const [search, setSearch] = useState<string>("");
   const { dispatch } = useContext(appContext);
   const { t }: UseTranslationResponse = useTranslation();
+
   const changeLanguage = (): void => {
     dispatch(setLanguage());
   };
-  const setSearchTerm = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(setSearch(e.target.value));
-  };
+  useEffect(() => {
+    dispatch(filterUsers(search));
+  }, [dispatch, search]);
   return (
     <header className="header">
       <div className="header__title">{t("headerTitle")}</div>
@@ -19,7 +21,7 @@ const Header = () => {
         <input
           type="search"
           placeholder={t("searchText")}
-          onChange={setSearchTerm}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
       <span onClick={changeLanguage} className="language">

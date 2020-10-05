@@ -21,7 +21,7 @@ export interface StateData {
   loading: boolean;
   language: string;
   search: string;
-  sortOrder: ValueType<SortOrder>;
+  filteredUsers: User[];
 }
 const initialState = {
   users: [],
@@ -29,6 +29,7 @@ const initialState = {
   language: "en",
   search: "",
   sortOrder: { value: "", label: "None" },
+  filteredUsers: [],
 };
 interface ContextData {
   state: StateData;

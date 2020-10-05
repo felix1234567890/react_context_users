@@ -4,7 +4,7 @@ import "./App.scss";
 import Filters from "./components/Filters";
 import Header from "./components/Header";
 import UsersList from "./components/UsersList";
-import { appContext } from "./context";
+import { appContext, User } from "./context";
 import { setLoading, setUsers } from "./reducer/actions";
 
 function App() {
@@ -13,12 +13,18 @@ function App() {
     dispatch,
   } = useContext(appContext);
   const { i18n }: UseTranslationResponse = useTranslation();
-
+  const shuffleUsers = (users: User[]): void => {
+    for (let i = users.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [users[i], users[j]] = [users[j], users[i]];
+    }
+  };
   useEffect(() => {
     dispatch(setLoading());
     fetch("./users.json")
       .then((res) => res.json())
       .then((data) => {
+        shuffleUsers(data);
         dispatch(setUsers(data));
         dispatch(setLoading());
       });

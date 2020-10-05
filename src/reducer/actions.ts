@@ -5,8 +5,8 @@ export enum ActionType {
   SetUsers = "SET_USERS",
   SetLoading = "SET_LOADING",
   SetLanguage = "SET_LANGUAGE",
-  SetSearch = "SET_SEARCH",
-  SetSortOrder = "SET_SORT_ORDER",
+  FilterUsers = "FILTER_USERS",
+  SortUsers = "SORT_USERS",
 }
 
 interface ISetUsers {
@@ -19,20 +19,20 @@ interface ISetLoading {
 interface ISetLanguage {
   type: ActionType.SetLanguage;
 }
-interface ISetSearch {
-  type: ActionType.SetSearch;
-  payload: string;
-}
-interface ISetSortOrder {
-  type: ActionType.SetSortOrder;
+interface ISortUsers {
+  type: ActionType.SortUsers;
   payload: ValueType<SortOrder>;
+}
+interface IFilterUsers {
+  type: ActionType.FilterUsers;
+  payload: string;
 }
 export type Actions =
   | ISetUsers
   | ISetLoading
   | ISetLanguage
-  | ISetSearch
-  | ISetSortOrder;
+  | ISortUsers
+  | IFilterUsers;
 
 export const setUsers = (users: User[]): ISetUsers => ({
   type: ActionType.SetUsers,
@@ -44,13 +44,13 @@ export const setLoading = (): ISetLoading => ({
 export const setLanguage = (): ISetLanguage => ({
   type: ActionType.SetLanguage,
 });
-export const setSearch = (search: string): ISetSearch => ({
-  type: ActionType.SetSearch,
-  payload: search,
+
+export const sortUsers = (sort: ValueType<SortOrder>): ISortUsers => ({
+  type: ActionType.SortUsers,
+  payload: sort,
 });
-export const setSortOrder = (
-  srtOrder: ValueType<SortOrder>
-): ISetSortOrder => ({
-  type: ActionType.SetSortOrder,
-  payload: srtOrder,
+
+export const filterUsers = (search: string): IFilterUsers => ({
+  type: ActionType.FilterUsers,
+  payload: search,
 });
