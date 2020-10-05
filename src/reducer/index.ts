@@ -8,6 +8,16 @@ export default (state: StateData, action: Actions) => {
         ...state,
         loading: !state.loading,
       };
+    case ActionType.SetUsers:
+      return {
+        ...state,
+        users: action.payload,
+      };
+    case ActionType.SetLanguage:
+      return {
+        ...state,
+        language: state.language === "en" ? "hr" : "en",
+      };
     default:
       return state;
   }

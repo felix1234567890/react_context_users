@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, useReducer } from "react";
+import React, { createContext, Dispatch, useReducer, ReactNode } from "react";
 import reducer from "../reducer";
 import { Actions } from "../reducer/actions";
 
@@ -13,10 +13,12 @@ export interface User {
 export interface StateData {
   users: User[];
   loading: boolean;
+  language: string;
 }
 const initialState = {
   users: [],
   loading: false,
+  language: "en",
 };
 interface ContextData {
   state: StateData;
@@ -27,8 +29,10 @@ export const appContext = createContext<ContextData>({
   dispatch: () => null,
 });
 const { Provider } = appContext;
-
-const AppContext: React.FC = ({ children }) => {
+type AppProps = {
+  children: ReactNode;
+};
+const AppContext: React.FC<AppProps> = ({ children }: AppProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return <Provider value={{ state, dispatch }}>{children}</Provider>;
