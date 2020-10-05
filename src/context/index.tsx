@@ -1,4 +1,5 @@
 import React, { createContext, Dispatch, useReducer, ReactNode } from "react";
+import { ValueType } from "react-select";
 import reducer from "../reducer";
 import { Actions } from "../reducer/actions";
 
@@ -10,15 +11,24 @@ export interface User {
   gender: string;
   age: number;
 }
+
+export interface SortOrder {
+  value: string;
+  label: string;
+}
 export interface StateData {
   users: User[];
   loading: boolean;
   language: string;
+  search: string;
+  sortOrder: ValueType<SortOrder>;
 }
 const initialState = {
   users: [],
   loading: false,
   language: "en",
+  search: "",
+  sortOrder: { value: "", label: "None" },
 };
 interface ContextData {
   state: StateData;

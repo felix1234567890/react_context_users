@@ -1,7 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { useTranslation, UseTranslationResponse } from "react-i18next";
 import "./App.scss";
+import Filters from "./components/Filters";
 import Header from "./components/Header";
+import UsersList from "./components/UsersList";
 import { appContext } from "./context";
 import { setLoading, setUsers } from "./reducer/actions";
 
@@ -24,9 +26,15 @@ function App() {
 
   useEffect(() => {
     i18n.changeLanguage(language);
-  }, [language]);
+  }, [language, i18n]);
 
-  return <Header />;
+  return (
+    <>
+      <Header />
+      <Filters />
+      <UsersList />
+    </>
+  );
 }
 
 export default App;

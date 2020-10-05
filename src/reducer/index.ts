@@ -18,6 +18,16 @@ export default (state: StateData, action: Actions) => {
         ...state,
         language: state.language === "en" ? "hr" : "en",
       };
+    case ActionType.SetSortOrder:
+      return {
+        ...state,
+        sortOrder: action.payload,
+      };
+    case ActionType.SetSearch:
+      return {
+        ...state,
+        search: action.payload,
+      };
     default:
       return state;
   }
