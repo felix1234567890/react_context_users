@@ -1,5 +1,4 @@
 import React, { createContext, Dispatch, useReducer, ReactNode } from "react";
-import { ValueType } from "react-select";
 import reducer from "../reducer";
 import { Actions } from "../reducer/actions";
 

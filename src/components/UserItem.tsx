@@ -4,6 +4,7 @@ import { User } from "../context";
 
 const UserItem = ({ name, email, photo, country, gender, age }: User) => {
   const { t }: UseTranslationResponse = useTranslation();
+
   return (
     <article className="card">
       <img src={photo} alt="user avatar" />

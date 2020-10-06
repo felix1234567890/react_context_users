@@ -1,27 +1,15 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import Select, { ValueType } from "react-select";
-import { appContext, SortOrder } from "../context";
-import { sortUsers } from "../reducer/actions";
+import { SortOrder } from "../context";
 import selectStyles from "../selectStyles";
 
-const Filters = () => {
+interface FilterProps {
+  sort: (srtOrder: ValueType<SortOrder>) => void;
+  sortOrder: ValueType<SortOrder>;
+}
+const Filters: FC<FilterProps> = ({ sort, sortOrder }) => {
   const { t } = useTranslation();
-  const {
-    dispatch,
-    state: { filteredUsers },
-  } = useContext(appContext);
-  const [sortOrder, setSortOrder] = useState<ValueType<SortOrder>>({
-    value: "",
-    label: "None",
-  });
-
-  const setSort = (srtOrder: ValueType<SortOrder>) => {
-    setSortOrder(srtOrder);
-  };
-  useEffect(() => {
-    dispatch(sortUsers(sortOrder));
-  }, [dispatch, sortOrder]);
 
   const options: SortOrder[] = [
     { value: "", label: t("none") },
@@ -39,7 +27,7 @@ const Filters = () => {
         styles={selectStyles as any}
         defaultValue={sortOrder}
         value={sortOrder}
-        onChange={setSort}
+        onChange={sort}
         options={options}
       />
     </div>
