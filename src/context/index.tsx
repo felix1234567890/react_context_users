@@ -1,6 +1,11 @@
-import React, { createContext, Dispatch, useReducer, ReactNode } from "react";
+import React, {
+  createContext,
+  type Dispatch,
+  useReducer,
+  type ReactNode,
+} from "react";
 import reducer from "../reducer";
-import { Actions } from "../reducer/actions";
+import { type Actions } from "../reducer/actions";
 
 export interface User {
   name: string;
@@ -39,9 +44,9 @@ export const appContext = createContext<ContextData>({
   dispatch: () => null,
 });
 const { Provider } = appContext;
-type AppProps = {
+interface AppProps {
   children: ReactNode;
-};
+}
 const AppContext: React.FC<AppProps> = ({ children }: AppProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 

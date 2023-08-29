@@ -1,7 +1,5 @@
-import { Styles } from "react-select";
-
 export default {
-  menuList: (styles: Styles) => ({
+  menuList: (styles: Record<string, unknown>) => ({
     ...styles,
     color: "#ffffff",
     borderRadius: "0px 0px 6px 6px",
@@ -12,7 +10,7 @@ export default {
     left: 0,
     right: 0,
   }),
-  control: (styles: Styles) => ({
+  control: (styles: Record<string, unknown>) => ({
     ...styles,
     position: "relative",
     width: "100%",
@@ -22,20 +20,20 @@ export default {
     marginTop: "1rem",
   }),
 
-  indicatorsContainer: (styles: Styles) => ({
+  indicatorsContainer: (styles: Record<string, unknown>) => ({
     ...styles,
     marginLeft: "auto",
     height: "100%",
     marginTop: 0,
   }),
-  singleValue: (styles: Styles) => ({
+  singleValue: (styles: Record<string, unknown>) => ({
     ...styles,
     fontWeight: 500,
     paddingLeft: "8px",
     cursor: "pointer",
     userSelect: "none",
   }),
-  option: (styles: Styles) => ({
+  option: (styles: Record<string, unknown>) => ({
     ...styles,
     ":hover": {
       backgroundColor: "purple",

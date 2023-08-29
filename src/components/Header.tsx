@@ -1,14 +1,20 @@
-import React, { useContext, SetStateAction, Dispatch, FC } from "react";
+import React, {
+  useContext,
+  type SetStateAction,
+  type Dispatch,
+  type FC,
+} from "react";
 import { appContext } from "../context";
 import { setLanguage } from "../reducer/actions";
-import { useTranslation, UseTranslationResponse } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 interface HeaderProps {
-  search: Dispatch<SetStateAction<string>>;
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
 }
-const Header: FC<HeaderProps> = ({ search }) => {
+const Header: FC<HeaderProps> = ({ search, setSearch }) => {
   const { dispatch } = useContext(appContext);
-  const { t }: UseTranslationResponse = useTranslation();
+  const { t } = useTranslation();
 
   const changeLanguage = (): void => {
     dispatch(setLanguage());
@@ -21,7 +27,10 @@ const Header: FC<HeaderProps> = ({ search }) => {
         <input
           type="search"
           placeholder={t("searchText")}
-          onChange={(e) => search(e.target.value)}
+          onChange={e => {
+            setSearch(e.target.value);
+          }}
+          value={search}
         />
       </div>
       <span onClick={changeLanguage} className="language">

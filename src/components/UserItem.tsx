@@ -1,9 +1,16 @@
-import React from "react";
-import { useTranslation, UseTranslationResponse } from "react-i18next";
-import { User } from "../context";
+import React, { type ReactElement } from "react";
+import { useTranslation } from "react-i18next";
+import { type User } from "../context";
 
-const UserItem = ({ name, email, photo, country, gender, age }: User) => {
-  const { t }: UseTranslationResponse = useTranslation();
+const UserItem = ({
+  name,
+  email,
+  photo,
+  country,
+  gender,
+  age,
+}: User): ReactElement => {
+  const { t } = useTranslation();
 
   return (
     <article className="card">

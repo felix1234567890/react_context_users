@@ -1,12 +1,12 @@
-import React, { FC } from "react";
+import React, { type FC } from "react";
 import { useTranslation } from "react-i18next";
-import Select, { ValueType } from "react-select";
-import { SortOrder } from "../context";
+import Select, { type SingleValue } from "react-select";
+import { type SortOrder } from "../context";
 import selectStyles from "../selectStyles";
 
 interface FilterProps {
-  sort: (srtOrder: ValueType<SortOrder>) => void;
-  sortOrder: ValueType<SortOrder>;
+  sort: (srtOrder: SingleValue<SortOrder>) => void;
+  sortOrder: SingleValue<SortOrder>;
 }
 const Filters: FC<FilterProps> = ({ sort, sortOrder }) => {
   const { t } = useTranslation();
@@ -29,6 +29,7 @@ const Filters: FC<FilterProps> = ({ sort, sortOrder }) => {
         value={sortOrder}
         onChange={sort}
         options={options}
+        isSearchable={false}
       />
     </div>
   );

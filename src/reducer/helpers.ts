@@ -1,7 +1,7 @@
-import { ValueType } from "react-select";
+import { SingleValue } from "react-select";
 import { SortOrder, User } from "../context";
 
-export const sortUsers = (users: User[], sortOrder: ValueType<SortOrder>) => {
+export const sortUsers = (users: User[], sortOrder: SingleValue<SortOrder>) => {
   const { value } = sortOrder as SortOrder;
   let sortedUsers;
   switch (value) {

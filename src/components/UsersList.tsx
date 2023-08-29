@@ -1,21 +1,21 @@
 import React, {
-  Dispatch,
-  FC,
-  SetStateAction,
+  type Dispatch,
+  type FC,
+  type SetStateAction,
   useContext,
   useEffect,
   useState,
 } from "react";
-import { ValueType } from "react-select";
-import { PaginationState } from "../App";
-import { appContext, SortOrder, User } from "../context";
+import { type SingleValue } from "react-select";
+import { type PaginationState } from "../App";
+import { appContext, type SortOrder, type User } from "../context";
 import UserItem from "./UserItem";
 
 interface UsersListProps {
   pagination: PaginationState;
   setPagination: Dispatch<SetStateAction<PaginationState>>;
   search: string;
-  sortOrder: ValueType<SortOrder>;
+  sortOrder: SingleValue<SortOrder>;
 }
 const UsersList: FC<UsersListProps> = ({
   pagination,
@@ -34,8 +34,8 @@ const UsersList: FC<UsersListProps> = ({
   const paginateUsers = (
     users: User[],
     pageNumber: number = 1,
-    itemsPerPage: number = 6
-  ) => {
+    itemsPerPage: number = 6,
+  ): User[] => {
     const skip = (pageNumber - 1) * itemsPerPage;
     if (users.length > 0) {
       const shownUsers = users.slice(skip, skip + itemsPerPage);
@@ -43,11 +43,11 @@ const UsersList: FC<UsersListProps> = ({
     } else return [];
   };
   useEffect(() => {
-    setPagination((prevState) => ({
+    setPagination(prevState => ({
       ...prevState,
       pageNumber: pagination.pageNumber,
     }));
-    if (search || value !== "") {
+    if (Boolean(search) || Boolean(value)) {
       setShownUsers(paginateUsers(filteredUsers, pagination.pageNumber));
     } else {
       setShownUsers(paginateUsers(users, pagination.pageNumber));
@@ -63,7 +63,7 @@ const UsersList: FC<UsersListProps> = ({
   ]);
 
   useEffect(() => {
-    setPagination((prevState) => ({
+    setPagination(prevState => ({
       ...prevState,
       pageNumber: 1,
       pageCount: Math.ceil(filteredUsers.length / prevState.itemsPerPage),
@@ -72,7 +72,7 @@ const UsersList: FC<UsersListProps> = ({
   }, [filteredUsers, setPagination, search, sortOrder]);
 
   useEffect(() => {
-    setPagination((prevState) => ({
+    setPagination(prevState => ({
       ...prevState,
       pageNumber: 1,
       pageCount: Math.ceil(users.length / prevState.itemsPerPage),

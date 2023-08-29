@@ -1,4 +1,4 @@
-import { ValueType } from "react-select";
+import { SingleValue } from "react-select";
 import { SortOrder, User } from "../context";
 
 export enum ActionType {
@@ -21,7 +21,7 @@ interface ISetLanguage {
 }
 interface ISortUsers {
   type: ActionType.SortUsers;
-  payload: ValueType<SortOrder>;
+  payload: SingleValue<SortOrder>;
 }
 interface IFilterUsers {
   type: ActionType.FilterUsers;
@@ -45,7 +45,7 @@ export const setLanguage = (): ISetLanguage => ({
   type: ActionType.SetLanguage,
 });
 
-export const sortUsers = (sort: ValueType<SortOrder>): ISortUsers => ({
+export const sortUsers = (sort: SingleValue<SortOrder>): ISortUsers => ({
   type: ActionType.SortUsers,
   payload: sort,
 });

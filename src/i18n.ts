@@ -9,7 +9,7 @@ i18n
   .init({
     lng: "en",
     fallbackLng: "en",
-    whitelist: ["en", "hr"],
+    supportedLngs: ["en", "hr"],
     backend: {
       loadPath: "/locales/{{lng}}/translation.json",
     },
